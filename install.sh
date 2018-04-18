@@ -222,7 +222,14 @@ cd /home/vps/public_html/
 rm -rf install
 
 sleep 3
-#ให้ตอบ Y
+clear
+echo "
+----------------------------------------------
+[√] Source : Ocspanel.info 
+[√] ขั้นตอนต่อไปนี้ให้ท่านตอบ..Y
+[√] กำลังเริ่มติดตั้ง : Wallet..... [ OK !! ]
+----------------------------------------------
+ "
 sudo apt-get install curl
 sudo service apache2 restart
 sudo apt-get install php5-curl
