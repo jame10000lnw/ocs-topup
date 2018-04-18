@@ -218,6 +218,10 @@ sleep 5
 nano /home/vps/public_html/application/controllers/topup/wallet/config.php
 
 sleep 3
+cd /home/vps/public_html/
+rm -rf install
+
+sleep 5
 sudo apt-get install curl
 sudo service apache2 restart
 sudo apt-get install php5-curl
