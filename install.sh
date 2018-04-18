@@ -217,6 +217,13 @@ echo "กรุณาตั้งค่า ระบบเติมเงิน 
 sleep 5
 nano /home/vps/public_html/application/controllers/topup/wallet/config.php
 
+sleep 3
+sudo apt-get install curl
+sudo service apache2 restart
+sudo apt-get install php5-curl
+sudo service apache2 restart
+
+sleep 5
 # info
 clear
 echo "================ การติดตั้งเสร็จสิ้น พร้อมใช้งาน ================" | tee -a log-install.txt
