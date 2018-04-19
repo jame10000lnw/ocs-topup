@@ -45,6 +45,23 @@ fi
 # GO TO ROOT
 cd
 
+# text gambar
+apt-get install boxes
+
+# install lolcat
+sudo apt-get -y install ruby
+sudo gem install lolcat
+
+clear
+echo "
+----------------------------------------------
+[√] ยินดีต้อนรับเข้าสู่ : ระบบสคริป Ocspanel.info 
+[√] Connect...
+[√] Wellcome : กรุณาทำตามขั้นตอน... [ OK !! ]
+----------------------------------------------
+ " | lolcat
+ sleep 3
+
 MYIP=$(wget -qO- ipv4.icanhazip.com);
 
 flag=0	
