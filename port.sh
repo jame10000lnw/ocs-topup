@@ -45,6 +45,46 @@ fi
 # GO TO ROOT
 cd
 
+# text gambar
+apt-get install boxes
+
+# install lolcat
+sudo apt-get -y install ruby
+sudo gem install lolcat
+
+clear
+echo "
+----------------------------------------------
+[√] ยินดีต้อนรับเข้าสู่ : ระบบสคริป Ocspanel.info 
+[√] Connect...
+[√] Wellcome : กรุณาทำตามขั้นตอน... [ OK !! ]
+----------------------------------------------
+ " | lolcat
+ sleep 3
+
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+
+flag=0	
+
+clear
+echo "--------------- OCS PANELS INSTALLER FOR DEBIAN ---------------"
+
+echo "         DEVELOPED BY OCSPANEL.INFO / ( 097-026-7262 )                    "
+echo ""
+echo ""
+echo "ยินดีต้อนรับสู่ Osc Panel Auto Script : กรุณายืนยันการตั้งค่าต่าง ๆ ดังนี้"
+echo "คุณสามารถใช้ข้อมูลของตัวเองได้เพียงแค่ กดลบ หรือ กด Enter ถ้าคุณเห็นด้วยกับข้อมูลของเรา"
+echo ""
+echo "1.ตั้งรหัสผ่านใหม่สำหรับ user root MySQL:"
+read -p "Password baru: " -e -i 123456789 DatabasePass
+echo ""
+echo "2.ตั้งค่าชื่อฐานข้อมูลสำหรับ OCS Panels"
+echo "โปรดใช้ตัวอัพษรปกติเท่านั้นห้ามมีอักขระพิเศษอื่นๆที่ไม่ใช่ขีดล่าง (_)"
+read -p "Nama Database: " -e -i OCS_PANEL DatabaseName
+echo ""
+echo "เอาล่ะ [ พี่เทพ ] นี่คือทั้งหมดที่ระบบ Ocs Script ต้องการ เราพร้อมที่จะติดตั้งแผง OCS ของคุณแล้ว"
+read -n1 -r -p "กดปุ่ม Enter เพื่อดำเนินการต่อ ..."
+
 apt-get remove --purge mysql\*
 dpkg -l | grep -i mysql
 apt-get clean
@@ -102,10 +142,81 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/lnwseed/oc
 sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php5/fpm/php.ini
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 
+mkdir -p /home/vps/public_html
+
+useradd -m vps
+
+mkdir -p /home/vps/public_html
+echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
+chown -R www-data:www-data /home/vps/public_html
+chmod -R g+rw /home/vps/public_html
+
+service php5-fpm restart
+service nginx restart
+
+apt-get -y install zip unzip
+
+cd /home/vps/public_html
+
+#wget https://github.com/rasta-team/Full-OCS/raw/master/panelocs.zip
+wget https://raw.githubusercontent.com/lnwseed/ocs-topup/master/panelocs.zip
+
+mv panelocs.zip LTEOCS.zip
+
+unzip LTEOCS.zip
+
+rm -f LTEOCS.zip
+
+rm -f index.html
 
 chown -R www-data:www-data /home/vps/public_html
 chmod -R g+rw /home/vps/public_html
 
+#mysql -u root -p
+so2=$(expect -c "
+spawn mysql -u root -p; sleep 3
+expect \"\";  sleep 3; send \"$DatabasePass\r\"
+expect \"\";  sleep 3; send \"CREATE DATABASE IF NOT EXISTS $DatabaseName;EXIT;\r\"
+expect eof; ")
+echo "$so2"
+#pass
+#CREATE DATABASE IF NOT EXISTS OCS_PANEL;EXIT;
+
+chmod 777 /home/vps/public_html/application/controllers/topup/wallet/cookie.txt
+chmod 777 /home/vps/public_html/application/config/database.php
+chmod 755 /home/vps/public_html/application/controllers/topup/wallet/config.php
+chmod 755 /home/vps/public_html/application/controllers/topup/wallet/manager/TrueWallet.php
+chmod 755 /home/vps/public_html/application/controllers/topup/wallet/manager/Curl.php
+chmod 755 /home/vps/public_html/topup/confirm.php
+chmod 755 /home/vps/public_html/topup/get.php
+chmod 755 /home/vps/public_html/topup/index.php
+chmod 755 /home/vps/public_html/topup/input.php
+
+
+clear
+echo ""
+echo "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-"
+echo ""
+echo "เปิดเบราว์เซอร์และเข้าถึงที่อยู่ http://$MYIP:81/ และกรอกข้อมูล 2 ด้านล่าง!"
+echo "Database:"
+echo "- Database Host: localhost"
+echo "- Database Name: $DatabaseName"
+echo "- Database User: root"
+echo "- Database Pass: $DatabasePass"
+echo ""
+echo "Admin Login:"
+echo "- Username: ตามที่[พี่เทพ]ต้องการ"
+echo "- Password New: ตามที่[พี่เทพ]ต้องการ"
+echo "- Confirm Password New: ตามที่[พี่เทพ]ต้องการ"
+echo ""
+echo "นำข้อมูลไปติดตั้งที่ Browser และรอให้เสร็จสิ้นจากนั้นปิด Browser และกลับมาที่นี่ (Putty) แล้วกด [ENTER]!"
+
+sleep 3
+echo ""
+read -p "หากขั้นตอนข้างต้นเสร็จสิ้นโปรดกดปุ่ม [Enter] เพื่อดำเนินการต่อ ..."
+echo ""
+read -p "หาก [ พี่เทพ ] มั่นใขว่าขั้นตอนข้างต้นได้ทำเสร็จแล้วโปรดกดปุ่ม [Enter] เพื่อดำเนินการต่อ ..."
+echo ""
 
 cd /root
 
@@ -117,10 +228,15 @@ apt-get -y --force-yes -f install libxml-parser-perl
 
 echo "unset HISTFILE" >> /etc/profile
 
+sleep 5
+echo "กรุณาตั้งค่า ระบบเติมเงิน หมายเลขอ้างอิงวอลเลต"
+
+sleep 5
+nano /home/vps/public_html/application/controllers/topup/wallet/config.php
 
 sleep 2
 cd /home/vps/public_html/
-rm -rf port.sh
+rm -rf install
 
 sleep 3
 clear
@@ -147,5 +263,5 @@ echo "" | tee -a log-install.txt
 #echo "" | tee -a log-install.txt
 echo "โปรดรีบูต VPS ของคุณ!" | tee -a log-install.txt
 echo "=========================================================" | tee -a log-install.txt
-rm -f /root/port.sh
+rm -f /root/install.sh
 cd ~/
