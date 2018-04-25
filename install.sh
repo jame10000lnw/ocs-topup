@@ -60,7 +60,7 @@ echo "
 [√] Wellcome : กรุณาทำตามขั้นตอน... [ OK !! ]
 ----------------------------------------------
  " | lolcat
- sleep 3
+ sleep 5
 
 MYIP=$(wget -qO- ipv4.icanhazip.com);
 
@@ -84,6 +84,23 @@ read -p "Nama Database: " -e -i OCS_PANEL DatabaseName
 echo ""
 echo "เอาล่ะ [ พี่เทพ ] นี่คือทั้งหมดที่ระบบ Ocs Script ต้องการ เราพร้อมที่จะติดตั้งแผง OCS ของคุณแล้ว"
 read -n1 -r -p "กดปุ่ม Enter เพื่อดำเนินการต่อ ..."
+
+# text gambar
+apt-get install boxes
+
+# install lolcat
+sudo apt-get -y install ruby
+sudo gem install lolcat
+
+clear
+echo "
+----------------------------------------------
+[√] ยินดีต้อนรับเข้าสู่ : ระบบสคริป Ocspanel.info 
+[√] Connect...
+[√] Server Msg : เริ่มต้นติดตั้ง... [ OK !! ]
+----------------------------------------------
+ " | lolcat
+ sleep 5
 
 apt-get remove --purge mysql\*
 dpkg -l | grep -i mysql
@@ -218,6 +235,16 @@ echo ""
 read -p "หาก [ พี่เทพ ] มั่นใขว่าขั้นตอนข้างต้นได้ทำเสร็จแล้วโปรดกดปุ่ม [Enter] เพื่อดำเนินการต่อ ..."
 echo ""
 
+sleep 3
+clear
+echo "
+----------------------------------------------
+[√] Source : Ocspanel.info 
+[√] ขั้นตอนต่อไปนี้ให้ท่านตอบ..Y
+[√] กำลังเริ่มติดตั้ง : Wallet..... [ OK !! ]
+----------------------------------------------
+ " | lolcat
+ 
 cd /root
 
 apt-get update
@@ -228,10 +255,18 @@ apt-get -y --force-yes -f install libxml-parser-perl
 
 echo "unset HISTFILE" >> /etc/profile
 
-sleep 5
+sleep 3
+clear
+echo "
+----------------------------------------------
+[√] Source : Ocspanel.info 
+[√] ขั้นตอนต่อไปนี้ให้ท่านตอบ..Y
+[√] กำลังเริ่มติดตั้ง : Wallet..... [ OK !! ]
+----------------------------------------------
+ " | lolcat
 echo "กรุณาตั้งค่า ระบบเติมเงิน หมายเลขอ้างอิงวอลเลต"
 
-sleep 5
+sleep 3
 nano /home/vps/public_html/application/controllers/topup/wallet/config.php
 
 sleep 2
@@ -246,13 +281,22 @@ echo "
 [√] ขั้นตอนต่อไปนี้ให้ท่านตอบ..Y
 [√] กำลังเริ่มติดตั้ง : Wallet..... [ OK !! ]
 ----------------------------------------------
- "
+ " | lolcat
+ sleep 5
 sudo apt-get install curl
 sudo service apache2 restart
 sudo apt-get install php5-curl
 sudo service apache2 restart
 
-sleep 4
+clear
+echo "
+----------------------------------------------
+[√] Source : Ocspanel.info 
+[√] ขั้นตอนต่อไปนี้ให้ท่านตอบ..Y
+[√] กำลังประมวลผล : การติดตั้ง..... [ OK !! ]
+----------------------------------------------
+ " | lolcat
+ sleep 5
 # info
 clear
 echo "================ การติดตั้งเสร็จสิ้น พร้อมใช้งาน ================" | tee -a log-install.txt
