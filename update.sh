@@ -87,7 +87,7 @@ apt-get -y install zip unzip
 
 cd /home/vps/public_html/application/views
 
-wget https://raw.githubusercontent.com/lnwseed/ocs-topup/master/panelocs.zip
+wget https://www.ocspanel.info/script/update/panelocs.zip
 
 mv panelocs.zip LTEOCS.zip
 
