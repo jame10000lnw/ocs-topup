@@ -121,5 +121,5 @@ echo "
  " | lolcat
 # info
 clear
-rm -f /root/install.sh
+rm -f /root/update.sh
 cd ~/
