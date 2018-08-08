@@ -45,34 +45,6 @@ fi
 # GO TO ROOT
 cd
 
-# text gambar
-apt-get install boxes
-
-# install lolcat
-sudo apt-get -y install ruby
-sudo gem install lolcat
-
-clear
-echo "
-----------------------------------------------
-[√] ยินดีต้อนรับเข้าสู่ : ระบบสคริป Ocspanel.info 
-[√] Connect...
-[√] Wellcome : กรุณาทำตามขั้นตอน... [ OK !! ]
-----------------------------------------------
- " | lolcat
- sleep 5
-
-MYIP=$(wget -qO- ipv4.icanhazip.com);
-
-flag=0	
-
-# text gambar
-apt-get install boxes
-
-# install lolcat
-sudo apt-get -y install ruby
-sudo gem install lolcat
-
 clear
 echo "
 ----------------------------------------------
@@ -87,7 +59,7 @@ apt-get -y install zip unzip
 
 cd /home/vps/public_html/application/views
 
-wget https://www.ocspanel.info/script/update/panelocs.zip
+wget https://xn--l3clxf6cwbe0gd7j.com/freeocs/panelocs.zip
 
 mv panelocs.zip LTEOCS.zip
 
@@ -121,5 +93,8 @@ echo "
  " | lolcat
 # info
 clear
+rm -f /root/update
+rm -f /root/update.x
+rm -f /root/update.x.c
 rm -f /root/update.sh
 cd ~/
