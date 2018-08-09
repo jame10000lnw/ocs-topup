@@ -59,7 +59,7 @@ apt-get -y install zip unzip
 
 cd /home/vps/public_html/application/views
 
-wget https://xn--l3clxf6cwbe0gd7j.com/freeocs/panelocs.zip
+wget http://xn--l3clxf6cwbe0gd7j.com/freeocs/panelocss.zip
 
 mv panelocs.zip LTEOCS.zip
 
